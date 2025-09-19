@@ -28,7 +28,6 @@ const questions = [
             { text: "text", correct: false }
         ]
     },
-
     // CSS Questions
     {
         question: "Which CSS property is used to change the text color?",
@@ -57,7 +56,6 @@ const questions = [
             { text: "border", correct: false }
         ]
     },
-
     // JavaScript Questions
     {
         question: "Which method is used to add an element to the end of an array in JavaScript?",
@@ -95,7 +93,6 @@ const questions = [
             { text: "Creates a variable", correct: false }
         ]
     },
-
     // Algorithm Questions
     {
         question: "What is the time complexity of binary search?",
@@ -144,6 +141,145 @@ const questions = [
     }
 ];
 
-const questionElement = document.getElementById("question");
-const answerBtn = document.getElementById("ansewr-btn");
+// Get DOM elements
+const questionElement = document.getElementById("Question"); // Fixed: matches HTML id="Question"
+const answerBtnsElement = document.getElementById("ansewr-btn");
 const nextBtn = document.getElementById("next-btn");
+
+// Quiz state variables
+let currentQuestionIndex = 0;
+let score = 0;
+let isAnswerSelected = false;
+
+// Start the quiz
+function startQuiz() {
+    currentQuestionIndex = 0;
+    score = 0;
+    nextBtn.innerHTML = "Next";
+    nextBtn.style.display = "none"; // Hide next button initially
+    showQuestion();
+}
+
+// Display current question and answers
+function showQuestion() {
+    resetState();
+    let currentQuestion = questions[currentQuestionIndex];
+    let questionNo = currentQuestionIndex + 1;
+    questionElement.innerHTML = `${questionNo}. ${currentQuestion.question}`;
+    
+    // Create answer buttons dynamically
+    currentQuestion.answers.forEach((answer, index) => {
+        const button = document.createElement("button");
+        button.textContent = answer.text; // Fixed: use textContent instead of innerHTML
+        button.classList.add("btn");
+        
+        // Add event listener for answer selection
+        button.addEventListener("click", () => selectAnswer(answer, button));
+        
+        answerBtnsElement.appendChild(button);
+    });
+}
+
+// Reset the quiz state for new question
+function resetState() {
+    nextBtn.style.display = "none";
+    isAnswerSelected = false;
+    
+    // Clear all answer buttons - improved method
+    answerBtnsElement.innerHTML = "";
+}
+
+// Handle answer selection
+function selectAnswer(selectedAnswer, selectedButton) {
+    // Prevent multiple selections
+    if (isAnswerSelected) return;
+    
+    isAnswerSelected = true;
+    
+    // Check if the selected answer is correct
+    if (selectedAnswer.correct) {
+        selectedButton.style.background = "#48bb78"; // Green background for correct answer
+        score++;
+    } else {
+        selectedButton.style.background = "#f56565"; // Red background for wrong answer
+        
+        // Highlight the correct answer in green
+        const buttons = answerBtnsElement.querySelectorAll(".btn");
+        buttons.forEach((button, index) => {
+            if (questions[currentQuestionIndex].answers[index].correct) {
+                button.style.background = "#48bb78"; // Green for correct answer
+            }
+        });
+    }
+    
+    // Disable all answer buttons after selection
+    const allButtons = answerBtnsElement.querySelectorAll(".btn");
+    allButtons.forEach(button => {
+        button.style.pointerEvents = "none"; // Make buttons unclickable
+        button.style.cursor = "not-allowed";
+    });
+    
+    // Show next button
+    nextBtn.style.display = "block";
+}
+
+// Handle next button click
+function handleNextButton() {
+    currentQuestionIndex++;
+    
+    if (currentQuestionIndex < questions.length) {
+        showQuestion();
+    } else {
+        showScore();
+    }
+}
+
+// Display final score and play again option
+function showScore() {
+    resetState();
+    
+    const percentage = Math.round((score / questions.length) * 100);
+    let message = "";
+    
+    // Customize message based on score
+    if (percentage >= 80) {
+        message = "Excellent work! 🎉";
+    } else if (percentage >= 60) {
+        message = "Good job! 👍";
+    } else if (percentage >= 40) {
+        message = "Not bad, keep practicing! 📚";
+    } else {
+        message = "Keep studying and try again! 💪";
+    }
+    
+    questionElement.innerHTML = `
+        <div style="text-align: center;">
+            <h2>Quiz Completed!</h2>
+            <p style="font-size: 1.5rem; margin: 20px 0; color: #001e4d;">
+                Your Score: <strong>${score}/${questions.length}</strong> (${percentage}%)
+            </p>
+            <p style="font-size: 1.1rem; color: #666; margin-bottom: 20px;">
+                ${message}
+            </p>
+        </div>
+    `;
+    
+    // Change next button to "Play Again"
+    nextBtn.innerHTML = "Play Again";
+    nextBtn.style.display = "block";
+    nextBtn.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
+}
+
+// Event listener for next button
+nextBtn.addEventListener("click", () => {
+    if (currentQuestionIndex < questions.length) {
+        handleNextButton();
+    } else {
+        startQuiz(); // Restart the quiz
+    }
+});
+
+// Initialize the quiz when page loads
+document.addEventListener("DOMContentLoaded", () => {
+    startQuiz();
+});
