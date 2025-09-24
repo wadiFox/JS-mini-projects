@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Card - Casual T Shirt</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+    <div class="product-card">
+        <!-- Image du produit à gauche -->
+        <div class="product-image-container">
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDQwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjMkEyQTJBIi8+CjxyZWN0IHg9IjEwMCIgeT0iMTAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjMwMCIgcng9IjEwIiBmaWxsPSIjRkZGRkZGIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgo8dGV4dCB4PSIyMDAiIHk9IjI2MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI0ZGRkZGRiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4Ij5Qcm9kdWN0IEltYWdlPC90ZXh0Pgo8L3N2Zz4K" alt="Casual T Shirt" class="product-image" id="productImage">
+            
+            <!-- Points indicateurs pour navigation d'images -->
+            <div class="image-dots">
+                <div class="dot" data-image="0"></div>
+                <div class="dot active" data-image="1"></div>
+                <div class="dot" data-image="2"></div>
+            </div>
+        </div>
+        
+        <!-- Détails du produit à droite -->
+        <div class="product-details">
+            <div>
+                <h1 class="product-title">Casual T Shirt</h1>
+                <div class="product-price" id="productPrice">$15.00</div>
+                <span class="discount-badge">30% OFF</span>
+                
+                <p class="product-description">
+                    Wrangler is an American manufacturer of jeans and other clothing items, particularly workwear.
+                </p>
+            </div>
+            
+            <div class="product-options">
+                <!-- Sélection des tailles -->
+                <div class="option-group">
+                    <label class="option-label">Size</label>
+                    <div class="size-options">
+                        <div class="size-option" data-size="S">S</div>
+                        <div class="size-option selected" data-size="M">M</div>
+                        <div class="size-option" data-size="L">L</div>
+                        <div class="size-option" data-size="XL">XL</div>
+                        <div class="size-option" data-size="XXL">XXL</div>
+                    </div>
+                </div>
+                
+                <!-- Sélection des couleurs -->
+                <div class="option-group">
+                    <label class="option-label">Color</label>
+                    <div class="color-options">
+                        <div class="color-option color-red" data-color="red"></div>
+                        <div class="color-option color-green selected" data-color="green"></div>
+                        <div class="color-option color-blue" data-color="blue"></div>
+                        <div class="color-option color-pink" data-color="pink"></div>
+                    </div>
+                </div>
+                
+                <!-- Quantité -->
+                <div class="option-group">
+                    <label class="option-label">Quantity</label>
+                    <div class="quantity-group">
+                        <input type="number" value="1" min="1" max="10" class="quantity-input" id="quantityInput">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bouton d'achat -->
+            <button class="buy-button" id="buyButton">Buy Now</button>
+        </div>
+    </div>
+
+<script src="main.js"></script>    
+</body>
+</html>

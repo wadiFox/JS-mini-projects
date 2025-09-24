@@ -1,0 +1,256 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            display: flex;
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image-container {
+            flex: 1;
+            position: relative;
+            background: #2a2a2a;
+            min-height: 500px;
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .image-dots {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #5c6bc0;
+            transform: scale(1.2);
+        }
+
+        .product-details {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #f8f9fa;
+        }
+
+        .product-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        .product-price {
+            font-size: 2em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .discount-badge {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .product-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 0.95em;
+        }
+
+        .product-options {
+            margin-bottom: 30px;
+        }
+
+        .option-group {
+            margin-bottom: 25px;
+        }
+
+        .option-label {
+            display: block;
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 12px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .size-option {
+            padding: 12px 18px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .size-option:hover {
+            border-color: #5c6bc0;
+            color: #5c6bc0;
+        }
+
+        .size-option.selected {
+            background: #5c6bc0;
+            border-color: #5c6bc0;
+            color: white;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 12px;
+        }
+
+        .color-option {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+
+        .color-option.selected {
+            border-color: #333;
+            transform: scale(1.15);
+        }
+
+        .color-red { background: #f44336; }
+        .color-green { background: #4caf50; }
+        .color-blue { background: #2196f3; }
+        .color-pink { background: #e91e63; }
+
+        .quantity-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quantity-input {
+            width: 60px;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 1em;
+        }
+
+        .quantity-input:focus {
+            outline: none;
+            border-color: #5c6bc0;
+        }
+
+        .buy-button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #5c6bc0, #7986cb);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .buy-button:hover {
+            background: linear-gradient(135deg, #4a54a3, #6573c3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(92, 107, 192, 0.4);
+        }
+
+        .buy-button:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .product-card {
+                flex-direction: column;
+                max-width: 500px;
+            }
+
+            .product-image-container {
+                min-height: 400px;
+            }
+
+            .product-details {
+                padding: 30px;
+            }
+
+            .product-title {
+                font-size: 1.8em;
+            }
+
+            .size-options {
+                flex-wrap: wrap;
+            }
+        }
+   
